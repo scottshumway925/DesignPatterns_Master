@@ -44,6 +44,7 @@
     <ClInclude Include="uiInteract.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include=".gitignore" />
     <None Include="packages.config" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
