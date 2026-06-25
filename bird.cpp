@@ -236,7 +236,7 @@ void Standard::draw()
 {
    if (!isDead())
    {
-      vector<string> command = {"STANDARD", to_string(pt.getX()), to_string(pt.getY()), to_string(radius)};
+      vector<string> command = { "STANDARD", to_string(pt.getX()), to_string(pt.getY()), to_string(radius) };
       drawIt(command);
    }
 }

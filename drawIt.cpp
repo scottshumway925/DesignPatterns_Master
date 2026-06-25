@@ -260,7 +260,7 @@ void drawFragment(double x, double y, double age, double size)
 }
 
 /************************************************************************
- *  STREEK
+ * DRAW STREEK
  * Draw the shrapnel streek on the screen
  *************************************************************************/
 void drawStreek(double x, double y, double xEnd, double yEnd, double age)
