@@ -7,30 +7,14 @@
  *    Inert point values on the screen.
  ************************************************************************/
 
- #include "points.h"
- #include <cassert>
+#include "points.h"
+#include <cassert>
+#include <string>
 
-#ifdef __APPLE__
-#define GL_SILENCE_DEPRECATION
-#include <openGL/gl.h>    // Main OpenGL library
-#include <GLUT/glut.h>    // Second OpenGL library
-#define GLUT_TEXT GLUT_BITMAP_HELVETICA_18
-#endif // __APPLE__
-
-#ifdef __linux__
-#include <GL/gl.h>        // Main OpenGL library
-#include <GL/glut.h>      // Second OpenGL library
-#define GLUT_TEXT GLUT_BITMAP_HELVETICA_12
-#endif // __linux__
-
-#ifdef _WIN32
-#include <stdio.h>
-#include <stdlib.h>
-#include <GL/glut.h>         // OpenGL library we copied 
 #define _USE_MATH_DEFINES
 #include <math.h>
-#define GLUT_TEXT GLUT_BITMAP_HELVETICA_12
-#endif // _WIN32
+
+using namespace std;
 
  /******************************************************************
  * RANDOM
@@ -72,27 +56,20 @@ Points::Points(const Position & pt, int value)
  * POINTS SHOW
  * Draw a points value on the screen
  *********************************************/
-void Points::show() const
+void Points::show(const ogstream& gout) const
 {
    if (value == 0)
       return;
 
-   void* pFont = GLUT_TEXT;
-
    // set the color
-   GLfloat red   = (value <= 0.0 ? 1.0 : 0.0) * age;
-   GLfloat green = (value <= 0.0 ? 0.0 : 1.0) * age;
-   GLfloat blue  = 0.0;
-   glColor3f(red, green, blue);
-
-   // specify the position
-   glRasterPos2f((GLfloat)pt.getX(), (GLfloat)pt.getY());
+   double red   = (value <= 0.0 ? 1.0 : 0.0) * age;
+   double green = (value <= 0.0 ? 0.0 : 1.0) * age;
+   double blue  = 0.0;
 
    // draw the digits
    int number = (value > 0 ? value : -value);
-   if (number / 10 != 0)
-      glutBitmapCharacter(pFont, (char)(number / 10) + '0');
-   glutBitmapCharacter(pFont, (char)(number % 10) + '0');
+
+   gout.drawText(pt, to_string(number), red, green, blue);
 }
 
 /*********************************************

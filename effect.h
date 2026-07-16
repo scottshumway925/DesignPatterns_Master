@@ -9,6 +9,7 @@
 
 #pragma once
 #include "position.h"
+#include "ogstream.h"
 
 /**********************
  * Effect: stuff that is not interactive
@@ -23,7 +24,7 @@ public:
     Effect(const Position & pt) : pt(pt), age(0.5) {}
     
     // draw it
-    virtual void render() const = 0;
+    virtual void render(const ogstream& gout) const = 0;
     
     // move it forward with regards to inertia. Let it age
     virtual void fly() = 0;
@@ -46,7 +47,7 @@ public:
     Fragment(const Position & pt, const Velocity & v);
     
     // draw it
-    void render() const;
+    void render(const ogstream& gout) const;
     
     // move it forward with regards to inertia. Let it age
     void fly();
@@ -65,7 +66,7 @@ public:
     Streek(const Position & pt, Velocity v);
     
     // draw it
-    void render() const;
+    void render(const ogstream& gout) const;
     
     // move it forward with regards to inertia. Let it age
     void fly();
@@ -84,7 +85,7 @@ public:
     Exhaust(const Position & pt, Velocity v);
     
     // draw it
-    void render() const;
+    void render(const ogstream& gout) const;
     
     // move it forward with regards to inertia. Let it age
     void fly();

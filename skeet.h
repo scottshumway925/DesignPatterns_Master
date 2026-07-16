@@ -18,6 +18,7 @@
 #include "time.h"
 #include "score.h"
 #include "points.h"
+#include "ogstream.h"
 
 #include <list>
 
@@ -29,7 +30,7 @@ class Skeet
 {
 public:
     Skeet(Position & dimensions) : dimensions(dimensions),
-        gun(Position(800.0, 0.0)), time(), score(), hitRatio(), bullseye(false) {}
+        gun(Position(800.0, 0.0)), time(), score(), hitRatio(), bullseye(false), gout(dimensions) {}
 
     // handle all user input
     void interact(const UserInput& ui);
@@ -46,10 +47,6 @@ public:
 private:
     // generate new birds
     void spawn();                  
-    void drawBackground(double redBack, double greenBack, double blueBack) const;
-    void drawTimer(double percent,
-                   double redFore, double greenFore, double blueFore,
-                   double redBack, double greenBack, double blueBack) const;
     void drawBullseye(double angle) const;
 
     Gun gun;                       // the gun
@@ -62,4 +59,5 @@ private:
     HitRatio hitRatio;             // the hit ratio for the birds
     Position dimensions;           // size of the screen
     bool bullseye;
+    ogstream gout;
 };

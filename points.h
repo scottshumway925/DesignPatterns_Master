@@ -11,6 +11,7 @@
 #pragma once
 
 #include "position.h"
+#include "ogstream.h"
 
  /*********************************************
   * POINTS
@@ -20,7 +21,7 @@ class Points
 {
 public:
    Points(const Position& pt, int value);
-   void show() const;
+   void show(const ogstream& gout) const;
    void update();
    bool isDead() const {return age <= 0.0; }
 private:

@@ -12,6 +12,7 @@
 #include "effect.h"
 #include <list>
 #include <cassert>
+#include "ogstream.h"
 
 /*********************************************
  * BULLET
@@ -43,7 +44,7 @@ public:
 
    // special functions
    virtual void death(std::list<Bullet *> & bullets) {}
-   virtual void output() = 0;
+   virtual void output(const ogstream& gout) = 0;
    virtual void input(bool isUp, bool isDown, bool isB) {}
    virtual void move(std::list<Effect*> &effects);
 
@@ -53,11 +54,6 @@ protected:
       return (pt.getX() < -radius || pt.getX() >= dimensions.getX() + radius ||
          pt.getY() < -radius || pt.getY() >= dimensions.getY() + radius);
    }
-   void drawLine(const Position& begin, const Position& end,
-                 double red = 1.0, double green = 1.0, double blue = 1.0) const;
-
-   void drawDot(const Position& point, double radius = 2.0,
-                double red = 1.0, double green = 1.0, double blue = 1.0) const;
    int    random(int    min, int    max);
    double random(double min, double max);
 };
@@ -71,7 +67,7 @@ class Pellet : public Bullet
 public:
    Pellet(double angle, double speed = 15.0) : Bullet(angle, speed, 1.0, 1) {}
    
-   void output();
+   void output(const ogstream& gout);
 };
 
 /*********************
@@ -85,7 +81,7 @@ private:
 public:
    Bomb(double angle, double speed = 10.0) : Bullet(angle, speed, 4.0, 4), timeToDie(60) {}
    
-   void output();
+   void output(const ogstream& gout);
    void move(std::list<Effect*> & effects);
    void death(std::list<Bullet *> & bullets);
 };
@@ -113,7 +109,7 @@ public:
       radius = 3.0;
    }
    
-   void output();  
+   void output(const ogstream& gout);
    void move(std::list<Effect*> & effects);
 };
 
@@ -127,7 +123,7 @@ class Missile : public Bullet
 public:
    Missile(double angle, double speed = 10.0) : Bullet(angle, speed, 1.0, 3) {}
    
-   void output();
+   void output(const ogstream& gout);
    void input(bool isUp, bool isDown, bool isB)
    {
       if (isUp)
