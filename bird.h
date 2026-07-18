@@ -9,35 +9,27 @@
 
 #pragma once
 #include "position.h"
+#include "flyer.h"
 
 /**********************
  * BIRD
  * Everything that can be shot
  **********************/
-class Bird
+class Bird : public Flyer
 {
 protected:
    static Position dimensions; // size of the screen
-   Position pt;                  // position of the flyer
-   Velocity v;                // velocity of the flyer
-   double radius;             // the size (radius) of the flyer
-   bool dead;                 // is this flyer dead?
    int points;                // how many points is this worth?
    
 public:
-   Bird() : dead(false), points(0), radius(1.0) { }
+   Bird() : Flyer(), points(0) { }
    
    // setters
    void operator=(const Position    & rhs) { pt = rhs;    }
    void operator=(const Velocity & rhs) { v = rhs;     }
-   void kill()                          { dead = true; }
    void setPoints(int pts)              { points = pts;}
 
    // getters
-   bool isDead()           const { return dead;   }
-   Position getPosition()     const { return pt;     }
-   Velocity getVelocity()  const { return v;      }
-   double getRadius()      const { return radius; }
    int getPoints() const { return points; }
    bool isOutOfBounds() const
    {
@@ -46,8 +38,8 @@ public:
    }
 
    // special functions
-   virtual void draw() = 0;
-   virtual void advance() = 0;
+   virtual void draw() const override = 0;
+   virtual void move() override = 0;
 };
 
 /*********************************************
@@ -58,8 +50,8 @@ class Standard : public Bird
 {
 public:
     Standard(double radius = 25.0, double speed = 5.0, int points = 10);
-    void draw();
-    void advance();
+    void draw() const override;
+    void move() override;
 };
 
 /*********************************************
@@ -70,8 +62,8 @@ class Floater : public Bird
 {
 public:
     Floater(double radius = 30.0, double speed = 5.0, int points = 15);
-    void draw();
-    void advance();
+   void draw() const override;
+   void move() override;
 };
 
 /*********************************************
@@ -82,8 +74,8 @@ class Crazy : public Bird
 {
 public:
     Crazy(double radius = 30.0, double speed = 4.5, int points = 30);
-    void draw();
-    void advance();
+   void draw() const override;
+   void move() override;
 };
 
 /*********************************************
@@ -94,6 +86,6 @@ class Sinker : public Bird
 {
 public:
     Sinker(double radius = 30.0, double speed = 4.5, int points = 20);
-    void draw();
-    void advance();
+   void draw() const override;
+   void move() override;
 };

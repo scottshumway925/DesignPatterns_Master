@@ -9,7 +9,7 @@
 
 #pragma once
 #include "position.h"
-#include "effect.h"
+
 #include <list>
 #include <cassert>
 
@@ -26,6 +26,7 @@ protected:
    double radius;
    
 public:
+   Flyer() : dead(false), radius(1.0) { }
    
    // getters
    Position getPosition()  const { return pt;     }
@@ -34,7 +35,7 @@ public:
    double getRadius()      const { return radius; }
 
    // special functions
-   virtual void draw() = 0;
+   virtual void draw() const = 0;
    virtual void move() = 0;
    virtual void kill()             { dead = true; }
 };

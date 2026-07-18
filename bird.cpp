@@ -155,7 +155,7 @@ Crazy::Crazy(double radius, double speed, int points) : Bird()
  * STANDARD ADVANCE
  * How the standard bird moves - inertia and drag
  *********************************************/
-void Standard::advance()
+void Standard::move()
 {
    // small amount of drag
    v *= 0.995;
@@ -175,7 +175,7 @@ void Standard::advance()
  * FLOATER ADVANCE
  * How the floating bird moves: strong drag and anti-gravity
  *********************************************/
-void Floater::advance()
+void Floater::move()
 {
    // large amount of drag
    v *= 0.990;
@@ -198,7 +198,7 @@ void Floater::advance()
  * CRAZY ADVANCE
  * How the crazy bird moves, every half a second it changes direciton
  *********************************************/
-void Crazy::advance()
+void Crazy::move()
 {
    // erratic turns eery half a second or so
    if (randomInt(0, 15) == 0)
@@ -222,7 +222,7 @@ void Crazy::advance()
  * SINKER ADVANCE
  * How the sinker bird moves, no drag but gravity
  *********************************************/
-void Sinker::advance()
+void Sinker::move()
 {
    // gravity
    v.addDy(-0.07);
@@ -287,7 +287,7 @@ void drawDisk(const Position& center, double radius,
  * STANDARD DRAW
  * Draw a standard bird: blue center and white outline
  *********************************************/
-void Standard::draw()
+void Standard::draw() const
 {
    if (!isDead())
    {
@@ -300,7 +300,7 @@ void Standard::draw()
  * FLOATER DRAW
  * Draw a floating bird: white center and blue outline
  *********************************************/
-void Floater::draw()
+void Floater::draw() const
 {
    if (!isDead())
    {
@@ -313,7 +313,7 @@ void Floater::draw()
  * CRAZY DRAW
  * Draw a crazy bird: concentric circles in a course gradient
  *********************************************/
-void Crazy::draw()
+void Crazy::draw() const
 {
    if (!isDead())
    {
@@ -329,7 +329,7 @@ void Crazy::draw()
  * SINKER DRAW
  * Draw a sinker bird: black center and dark blue outline
  *********************************************/
-void Sinker::draw()
+void Sinker::draw() const
 {
    if (!isDead())
    {
