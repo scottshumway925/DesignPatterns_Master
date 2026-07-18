@@ -36,5 +36,5 @@ public:
    // special functions
    virtual void draw() = 0;
    virtual void move() = 0;
-   virtual void kill()                   { dead = true; }
-}
+   virtual void kill()             { dead = true; }
+};
