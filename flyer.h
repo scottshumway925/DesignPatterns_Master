@@ -4,7 +4,7 @@
  * Author:
  *    Tryhard Kings
  * Summary:
- *    Bridge that handles all movement
+ *    Bridge that handles draw and all movement
  ************************************************************************/
 
 #pragma once
