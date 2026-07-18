@@ -9,7 +9,6 @@
 
 #pragma once
 #include "position.h"
-#include "points.h"
 #include "effect.h"
 #include <list>
 #include <cassert>
@@ -21,7 +20,7 @@
 class Flyer
 {
 protected:
-   Points pt;
+   Position pt;
    Velocity v;
    bool dead;
    double radius;
@@ -29,7 +28,7 @@ protected:
 public:
    
    // getters
-   Position getPosition();
+   Position getPosition()  const { return pt;     }
    Velocity getVelocity()  const { return v;      }
    bool isDead()           const { return dead;   }
    double getRadius()      const { return radius; }
